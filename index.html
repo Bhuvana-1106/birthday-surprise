@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Moni 💖</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel+Decorative:wght@400;700&family=Dancing+Script:wght@400;600&family=Space+Mono:ital@0;1&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     LOADING SCREEN
+════════════════════════════════════════ -->
+<div id="loading-screen">
+  <div class="loader-inner">
+    <div class="loader-heart">♥</div>
+    <div class="loader-text">preparing something special…</div>
+    <div class="loader-bar"><div class="loader-fill"></div></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     CUSTOM CURSOR
+════════════════════════════════════════ -->
+<div id="cursor"></div>
+<div id="cursor-trail"></div>
+
+<!-- ═══════════════════════════════════════
+     PAGE 1 — PASSWORD SCREEN
+════════════════════════════════════════ -->
+<section id="page-password" class="page active">
+  <canvas id="password-canvas"></canvas>
+  <div class="password-container">
+
+    <!-- ✅ FIXED: polaroid now shows photos/main.jpeg properly -->
+    <div class="polaroid-card">
+      <div class="polaroid-img">
+        <img src="photos/main.jpeg" alt="us" style="width:100%;height:100%;object-fit:cover;display:block;" 
+             onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'polaroid-placeholder\'><span class=\'heart-big\'>♥</span><p>our photo 🌸</p></div>';" />
+      </div>
+      <p class="polaroid-caption">my dearest bestie 🌸</p>
+    </div>
+
+    <div class="lock-box">
+      <div class="lock-title">
+        <span class="lock-icon">🔐</span>
+        <h2>A small surprise made<br/>only for you 💖</h2>
+        <p class="lock-hint">Enter the passcode to unlock</p>
+      </div>
+
+      <div class="pin-display">
+        <span class="pin-dot" id="d0"></span>
+        <span class="pin-dot" id="d1"></span>
+        <span class="pin-dot" id="d2"></span>
+        <span class="pin-dot" id="d3"></span>
+      </div>
+      <p class="pin-error" id="pin-error">Hmm, try again 💫</p>
+
+      <div class="keypad">
+        <button class="key-btn" data-val="1">1</button>
+        <button class="key-btn" data-val="2">2</button>
+        <button class="key-btn" data-val="3">3</button>
+        <button class="key-btn" data-val="4">4</button>
+        <button class="key-btn" data-val="5">5</button>
+        <button class="key-btn" data-val="6">6</button>
+        <button class="key-btn" data-val="7">7</button>
+        <button class="key-btn" data-val="8">8</button>
+        <button class="key-btn" data-val="9">9</button>
+        <button class="key-btn key-clear" data-val="clear">⌫</button>
+        <button class="key-btn" data-val="0">0</button>
+        <button class="key-btn key-enter" data-val="enter">✓</button>
+      </div>
+      <p class="hint-text">hint: the day we became friends 🤍</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     PAGE 2 — HERO BIRTHDAY SCREEN
+════════════════════════════════════════ -->
+<section id="page-hero" class="page">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-content">
+    <p class="hero-sub">today is all about you</p>
+    <h1 class="hero-title">Happy Birthday<br/><span class="hero-name">Moni</span> ✨</h1>
+    <div class="typing-wrapper">
+      <p class="typing-text" id="typing-el"></p>
+      <span class="typing-cursor">|</span>
+    </div>
+    <div class="countdown-block">
+      <div class="count-item"><span id="ct-d">00</span><label>Days</label></div>
+      <div class="count-sep">:</div>
+      <div class="count-item"><span id="ct-h">00</span><label>Hours</label></div>
+      <div class="count-sep">:</div>
+      <div class="count-item"><span id="ct-m">00</span><label>Minutes</label></div>
+      <div class="count-sep">:</div>
+      <div class="count-item"><span id="ct-s">00</span><label>Seconds</label></div>
+    </div>
+    <button class="glow-btn" onclick="goTo('page-memories')">Open Your Surprise 💌</button>
+  </div>
+  <div class="floating-hearts" id="floating-hearts"></div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     PAGE 3 — MEMORIES GALLERY
+════════════════════════════════════════ -->
+<section id="page-memories" class="page">
+  <div class="memories-bg"></div>
+  <div class="memories-content">
+    <div class="section-header">
+      <p class="section-eyebrow">our story</p>
+      <h2 class="section-title">Every Memory<br/>With You ✨</h2>
+      <p class="section-sub">the moments that made us, us.</p>
+    </div>
+
+    <!--
+    ═══════════════════════════════════════════════════════
+    📸 HOW TO ADD YOUR PHOTOS:
+    
+    1. Create a folder called "photos" next to your index.html
+    2. Add your images named: photo1.jpg, photo2.jpg ... photo6.jpg
+       and also: main.jpg (for the password screen polaroid)
+    
+    Folder structure should look like:
+      birthday/
+        index.html
+        style.css
+        script.js
+        photos/
+          main.jpg        ← polaroid on password page
+          photo1.jpg      ← memory 1
+          photo2.jpg      ← memory 2
+          photo3.jpg      ← memory 3
+          photo4.jpg      ← memory 4
+          photo5.jpg      ← memory 5
+          photo6.jpg      ← memory 6
+    
+    If a photo is missing, a beautiful fallback emoji is shown.
+    ═══════════════════════════════════════════════════════
+    -->
+
+    <div class="polaroid-grid" id="polaroid-grid">
+
+      <!-- ✅ Each mem-img now has BOTH: background-image CSS (from style.css)
+           AND an <img> tag inside as fallback. The CSS background-image
+           handles photos if they exist; emoji shows if they don't. -->
+
+      <div class="mem-card" style="--r:-4deg">
+        <div class="mem-img mem-img-1">
+          <div class="mem-placeholder">📸</div>
+        </div>
+        <p class="mem-caption">the day we laughed till 3am 🌙</p>
+        <span class="mem-sticker">✨</span>
+      </div>
+
+      <div class="mem-card" style="--r:3deg">
+        <div class="mem-img mem-img-2">
+          <div class="mem-placeholder">🌸</div>
+        </div>
+        <p class="mem-caption">best trip ever, remember? 🗺️</p>
+        <span class="mem-sticker">🌟</span>
+      </div>
+
+      <div class="mem-card" style="--r:-2deg">
+        <div class="mem-img mem-img-3">
+          <div class="mem-placeholder">🍂</div>
+        </div>
+        <p class="mem-caption">cozy days &amp; warm hearts 🫶</p>
+        <span class="mem-sticker">💫</span>
+      </div>
+
+      <div class="mem-card" style="--r:5deg">
+        <div class="mem-img mem-img-4">
+          <div class="mem-placeholder">🎵</div>
+        </div>
+        <p class="mem-caption">our forever playlist 🎶</p>
+        <span class="mem-sticker">🎀</span>
+      </div>
+
+      <div class="mem-card" style="--r:-3deg">
+        <div class="mem-img mem-img-5">
+          <div class="mem-placeholder">☕</div>
+        </div>
+        <p class="mem-caption">coffee dates that never end ☕</p>
+        <span class="mem-sticker">💕</span>
+      </div>
+
+      <div class="mem-card" style="--r:2deg">
+        <div class="mem-img mem-img-6">
+          <div class="mem-placeholder">🌙</div>
+        </div>
+        <p class="mem-caption">midnight talks &amp; midnight skies 🌙</p>
+        <span class="mem-sticker">⭐</span>
+      </div>
+
+    </div>
+
+    <div class="timeline-line"></div>
+    <button class="glow-btn" onclick="goTo('page-letter')">Read Your Letter 📜</button>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close">✕</button>
+    <div class="lightbox-inner" id="lightbox-inner"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     PAGE 4 — LETTER
+════════════════════════════════════════ -->
+<section id="page-letter" class="page">
+  <div class="letter-bg"></div>
+  <div class="petals-container" id="petals"></div>
+
+  <div class="letter-scene" id="letter-scene">
+    <div class="envelope" id="envelope" onclick="openEnvelope()">
+      <div class="env-flap"></div>
+      <div class="env-body">
+        <div class="env-heart">♥</div>
+        <p class="env-tap">tap to open 💌</p>
+      </div>
+    </div>
+
+    <div class="letter-paper" id="letter-paper">
+      <p class="letter-date">on your special day 🌸</p>
+      <h3 class="letter-greeting">Dear Moni,</h3>
+      <div class="letter-body" id="letter-body"></div>
+      <p class="letter-sign">— always yours 💖</p>
+      <div class="letter-deco">✦ ✦ ✦</div>
+    </div>
+  </div>
+
+  <button class="glow-btn letter-next-btn" id="letter-next-btn" onclick="goTo('page-final')" style="opacity:0;pointer-events:none;">See the Final Surprise 🎉</button>
+</section>
+
+<!-- ═══════════════════════════════════════
+     PAGE 5 — FINAL SURPRISE
+════════════════════════════════════════ -->
+<section id="page-final" class="page">
+  <canvas id="fireworks-canvas"></canvas>
+  <div class="confetti-container" id="confetti-container"></div>
+  <div class="balloons-row" id="balloons-row"></div>
+
+  <div class="final-content">
+
+    <!-- ✅ IMPROVED CAKE with better layers, frosting, and animation -->
+    <div class="cake-wrapper">
+      <div class="cake" id="cake">
+        <div class="cake-candles">
+          <div class="ck-candle"><div class="ck-flame"></div><div class="ck-flame-glow"></div></div>
+          <div class="ck-candle"><div class="ck-flame"></div><div class="ck-flame-glow"></div></div>
+          <div class="ck-candle"><div class="ck-flame"></div><div class="ck-flame-glow"></div></div>
+          <div class="ck-candle"><div class="ck-flame"></div><div class="ck-flame-glow"></div></div>
+          <div class="ck-candle"><div class="ck-flame"></div><div class="ck-flame-glow"></div></div>
+        </div>
+        <div class="cake-top">
+          <div class="cake-frosting-top"></div>
+        </div>
+        <div class="cake-middle">
+          <div class="cake-frosting-mid"></div>
+          <div class="cake-drip cake-drip-1"></div>
+          <div class="cake-drip cake-drip-2"></div>
+          <div class="cake-drip cake-drip-3"></div>
+        </div>
+        <div class="cake-bottom">
+          <div class="cake-frosting-bot"></div>
+          <div class="cake-drip cake-drip-4"></div>
+          <div class="cake-drip cake-drip-5"></div>
+          <div class="cake-plate"></div>
+        </div>
+      </div>
+    </div>
+
+    <h1 class="final-title">Moni Wish You a many many more Happy Returns of the day <br/>May you have a great year ahead and be Happy always  💖</h1>
+    <p class="final-sub">Wishing you a birthday as beautiful as you are.</p>
+    <p class="final-sub2">May this year hold nothing but love, laughter, and everything you deserve.</p>
+
+    <div class="final-buttons">
+      <button class="glow-btn" onclick="replayAll()">↺ Replay</button>
+      <button class="glow-btn glow-btn-alt" onclick="showEasterEgg()">Find the Secret 🔮</button>
+    </div>
+  </div>
+
+  <!-- Easter egg -->
+  <div class="easter-egg" id="easter-egg">
+    <div class="egg-box">
+      <p class="egg-emoji">🌸</p>
+      <p class="egg-msg">"You are my favourite person in my degree life, my best friend, and the reason I believe in good people. Thank you for existing. Happy Birthday, dear."</p>
+      <button class="egg-close" onclick="hideEasterEgg()">close ♥</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     NAV DOTS
+════════════════════════════════════════ -->
+<nav class="nav-dots" id="nav-dots">
+  <span class="nav-dot active" data-page="page-hero" title="Home"></span>
+  <span class="nav-dot" data-page="page-memories" title="Memories"></span>
+  <span class="nav-dot" data-page="page-letter" title="Letter"></span>
+  <span class="nav-dot" data-page="page-final" title="Finale"></span>
+</nav>
+
+<!-- Page transition overlay -->
+<div id="transition-overlay"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
